@@ -1,4 +1,5 @@
 import StyledAboutUs from "./StyledAboutUs";
+import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
 
 const AboutUs = () => {
   return (
@@ -10,4 +11,4 @@ const AboutUs = () => {
   )
 }
 
-export default AboutUs;
+export default AppWrapperHOC(AboutUs);

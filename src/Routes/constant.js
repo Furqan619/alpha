@@ -1,5 +1,6 @@
 import Home from "../containers/Home";
 import AboutUs from "../containers/AboutUs";
+import Login from "../containers/Login";
 
 const Routers = Object.freeze([
   {
@@ -9,6 +10,10 @@ const Routers = Object.freeze([
   {
     path: "/about-us",
     component: AboutUs,
+  },
+  {
+    path: "/login",
+    component: Login,
   }
 ]);
 
