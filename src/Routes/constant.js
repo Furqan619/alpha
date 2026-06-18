@@ -4,6 +4,7 @@ import AboutUs from "../containers/AboutUs";
 import Login from "../containers/Login";
 import SignUp from "../containers/SignUp";
 import ContactUs from "../containers/ContactUs";
+import Jobs from "../containers/Jobs";
 
 const Routers = Object.freeze([
   {
@@ -25,8 +26,12 @@ const Routers = Object.freeze([
   {
     path: PATH.CONTACT,
     component: ContactUs,
+  },
+  {
+    path: PATH.JOBS,
+    component: Jobs,
   }
-  
+
 ]);
 
 export default Routers;
