@@ -1,4 +1,5 @@
 import { Button } from "antd";
+import PATH from "../../Routes/Paths";
 import StyledCommonHeader from "./StyledCommonHeader"
 import { PNG_IMAGES } from "../../Routes/assets/constant";
 import { HEADER_MENU } from "./constant";
@@ -8,7 +9,7 @@ const CommonHeader = () => {
     <StyledCommonHeader>
       <div className="common-header">
         <div className="header-logo">
-          <a href="/">
+          <a href={PATH.HOME}>
             <img
               src={PNG_IMAGES.ALPHA_LOGO.URL}
               alt={PNG_IMAGES.ALPHA_LOGO.ALT}
@@ -26,7 +27,7 @@ const CommonHeader = () => {
           </ul>
         </div>
         <div className="header-btn">
-          <Button href="/sign-up" className="primary-btn">Sign in</Button>
+          <Button href={PATH.SIGNUP} className="primary-btn">Sign in</Button>
         </div>
       </div>
     </StyledCommonHeader>

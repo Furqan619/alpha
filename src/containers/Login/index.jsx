@@ -1,4 +1,5 @@
 
+import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
 import { useState } from 'react';
 import StyledLogin from './StyledLogin';
 
@@ -40,4 +41,4 @@ const Login = ({ onSubmit }) => {
 	);
 };
 
-export default Login;
+export default AppWrapperHOC(Login);

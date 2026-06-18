@@ -1,12 +1,13 @@
+import PATH from "../../Routes/Paths";
 
 const HEADER_MENU = Object.freeze([
   {
     name: "About Us",
-    path: "/about-us"
+    path: PATH.ABOUT,
   },
   {
     name: "Contact Us",
-    path: "/contact-us"
+    path: PATH.CONTACT,
   }
 ]);
 
