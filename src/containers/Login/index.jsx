@@ -1,16 +1,32 @@
 
+import auth from "../../services/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
 import { useState } from 'react';
 import StyledLogin from './StyledLogin';
+import PATH from "../../Routes/Paths";
 
 const Login = ({ onSubmit }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const navigate = useNavigate();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (onSubmit) onSubmit({ email, password });
-    console.log('Login submitted:', { email, password });
+		try {
+			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+			const user = userCredential.user;
+			alert("Login successful!");
+			setEmail('');
+			setPassword('');
+			navigate(PATH.JOBS);
+			if (onSubmit) {
+				onSubmit(user);
+			}
+		} catch (error) {
+			alert(error.message);
+		}
 	};
 
 	return (
