@@ -1,5 +1,6 @@
 
 import auth from "../../services/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
@@ -17,12 +18,27 @@ const Login = ({ onSubmit }) => {
 		try {
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
 			const user = userCredential.user;
+
+			// fetch additional user data from Firestore (username, phone)
+			const db = getFirestore();
+			let username = null;
+			let phone = null;
+			try {
+				const userDoc = await getDoc(doc(db, 'users', user.uid));
+				if (userDoc.exists()) {
+					const data = userDoc.data();
+					username = data.username || null;
+					phone = data.phone || null;
+				}
+			} catch (e) {
+				console.error('Error fetching user profile:', e);
+			}
 			alert("Login successful!");
 			setEmail('');
 			setPassword('');
 			navigate(PATH.JOBS);
 			if (onSubmit) {
-				onSubmit(user);
+				onSubmit({ user, username, phone });
 			}
 		} catch (error) {
 			alert(error.message);

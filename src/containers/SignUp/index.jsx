@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import db from "../../services/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import auth from "../../services/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import StyledSignUp from './StyledSignUp';
 import PATH from "../../Routes/Paths";
 
 const SignUp = () => {
+  const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,8 +24,19 @@ const SignUp = () => {
           password
         );
 
+        const user = userCredential.user;
+
+        await setDoc(doc(db, "users", user.uid), {
+          username,
+          phone,
+          email,
+          createdAt: new Date()
+        });
+
       // console.log("User created:", userCredential.user);
       alert("Registration successful!");
+      setUsername("");
+      setPhone("");
       setEmail("");
       setPassword("");
       navigate(PATH.LOGIN);
@@ -34,6 +49,26 @@ const SignUp = () => {
     <StyledSignUp>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
         <div>
           <label htmlFor="email">Email:</label>
           <input
