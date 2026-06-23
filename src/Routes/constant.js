@@ -30,7 +30,8 @@ const Routers = Object.freeze([
   {
     path: PATH.JOBS,
     component: Jobs,
-  }
+    isPrivate: true,
+  } 
 
 ]);
 

@@ -9,10 +9,6 @@ const HEADER_MENU = Object.freeze([
     name: "Contact Us",
     path: PATH.CONTACT,
   },
-  {
-    name: "Jobs",
-    path: PATH.JOBS,
-  }
 
 ]);
 

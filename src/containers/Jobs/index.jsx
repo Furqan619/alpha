@@ -1,16 +1,44 @@
-
+import { useEffect, useState } from "react";
 import StyledJobs from "./StyledJobs";
 import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
+import { getAuth } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import db from "../../services/firestore";
 
-const Jobs = () => {
+function Jobs() {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) return;
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
-    <StyledJobs>
-      <div className="jobs-container">
-        <h2>Jobs</h2>
-        <p>This is a simple jobs container.</p>
-      </div>
-    </StyledJobs>
+    <div>
+      <h1>Jobs Page</h1>
+
+      {userData && (
+        <>
+          <p>Hi {userData.username}!</p>
+          <p>Email: {userData.email}</p>
+          <p>Phone: {userData.phone}</p>
+        </>
+      )}
+    </div>
   );
-};
+}
 
 export default AppWrapperHOC(Jobs);
