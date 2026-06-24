@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import auth from "../services/auth";
 import PATH from "./Paths";
+import { Spin } from "antd";
 
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(undefined);
@@ -22,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
   }, []);
 
   if (user === undefined) {
-    return <div>Loading...</div>;
+    return <Spin percent={100} fullscreen />;
   }
 
   return user ? children : <Navigate to={PATH.LOGIN} replace />;
