@@ -1,7 +1,11 @@
 
 import auth from "../../services/auth";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
 import { useState } from 'react';
@@ -16,7 +20,9 @@ const Login = ({ onSubmit }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			await setPersistence(auth, browserSessionPersistence);
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
+			sessionStorage.setItem("activeSession", "true");
 			const user = userCredential.user;
 
 			// fetch additional user data from Firestore (username, phone)
@@ -36,7 +42,7 @@ const Login = ({ onSubmit }) => {
 			alert("Login successful!");
 			setEmail('');
 			setPassword('');
-			navigate(PATH.JOBS);
+			navigate(PATH.PROFILE);
 			if (onSubmit) {
 				onSubmit({ user, username, phone });
 			}

@@ -4,7 +4,8 @@ const PATH = {
   CONTACT: '/contact-us',
   LOGIN: '/login',
   SIGNUP: '/sign-up',
-  JOBS: '/jobs'
+  JOBS: '/jobs',
+  PROFILE: '/profile',
 };
 
 export default PATH;

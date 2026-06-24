@@ -5,6 +5,7 @@ import Login from "../containers/Login";
 import SignUp from "../containers/SignUp";
 import ContactUs from "../containers/ContactUs";
 import Jobs from "../containers/Jobs";
+import Profile from "../containers/Profile";
 
 const Routers = Object.freeze([
   {
@@ -31,7 +32,12 @@ const Routers = Object.freeze([
     path: PATH.JOBS,
     component: Jobs,
     isPrivate: true,
-  } 
+  },
+  {
+    path: PATH.PROFILE,
+    component: Profile,
+    isPrivate: true,
+  }
 
 ]);
 

@@ -1,44 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "../../services/auth";
+import PATH from "../../Routes/Paths";
 import StyledJobs from "./StyledJobs";
 import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
-import { getAuth } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import db from "../../services/firestore";
 
-function Jobs() {
-  const [userData, setUserData] = useState(null);
+const Jobs = () => {
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const auth = getAuth();
-      const user = auth.currentUser;
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    console.log("Auth State Changed");
+    console.log(user);
+  });
 
-      if (!user) return;
-
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setUserData(docSnap.data());
-      }
-    };
-
-    fetchUserData();
-  }, []);
+  return unsubscribe;
+}, []);
 
   return (
     <div>
-      <h1>Jobs Page</h1>
-
-      {userData && (
-        <>
-          <p>Hi {userData.username}!</p>
-          <p>Email: {userData.email}</p>
-          <p>Phone: {userData.phone}</p>
-        </>
-      )}
+      <h1>Jobs</h1>
+      <p>This is the profile page.</p>
     </div>
   );
-}
+};
 
 export default AppWrapperHOC(Jobs);
