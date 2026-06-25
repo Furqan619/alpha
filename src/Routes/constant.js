@@ -6,6 +6,7 @@ import SignUp from "../containers/SignUp";
 import ContactUs from "../containers/ContactUs";
 import Jobs from "../containers/Jobs";
 import Profile from "../containers/Profile";
+import ForgotPassword from "../containers/Login/ForgotPassword";
 
 const Routers = Object.freeze([
   {
@@ -27,6 +28,10 @@ const Routers = Object.freeze([
   {
     path: PATH.CONTACT,
     component: ContactUs,
+  },
+  {
+    path: PATH.FORGOT_PASSWORD,
+    component: ForgotPassword,
   },
   {
     path: PATH.JOBS,

@@ -7,10 +7,10 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import AppWrapperHOC from "../CommonHOC/AppWrapperHOC";
 import { useState } from 'react';
 import StyledLogin from './StyledLogin';
 import PATH from "../../Routes/Paths";
+import { PNG_IMAGES } from "../../Routes/assets/constant";
 
 const Login = ({ onSubmit }) => {
 	const [email, setEmail] = useState('');
@@ -53,6 +53,11 @@ const Login = ({ onSubmit }) => {
 
 	return (
 		<StyledLogin>
+			<div>
+				<a href={PATH.HOME}>
+					<img src={PNG_IMAGES.ALPHA_LOGO.URL} alt={PNG_IMAGES.ALPHA_LOGO.ALT} />
+				</a>
+			</div>
 			<h2>Login</h2>
 			<form onSubmit={handleSubmit}>
 				<div>
@@ -73,10 +78,15 @@ const Login = ({ onSubmit }) => {
 						required
 					/>
 				</div>
-				<button type="submit" className="primary-btn">Sign in</button>
+				<div>
+					<a href={PATH.FORGOT_PASSWORD}>Forgot Password?</a>
+				</div>
+					<button type="submit" className="primary-btn">Sign in</button>
+				<p>Don't have an account? <a href={PATH.SIGNUP}>Sign up</a></p>
+				
 			</form>
 		</StyledLogin>
 	);
 };
 
-export default AppWrapperHOC(Login);
+export default Login;

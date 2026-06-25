@@ -6,6 +6,7 @@ const PATH = {
   SIGNUP: '/sign-up',
   JOBS: '/jobs',
   PROFILE: '/profile',
+  FORGOT_PASSWORD: '/forgot-password',
 };
 
 export default PATH;

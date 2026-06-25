@@ -8,12 +8,12 @@ const StyledCommonHeader = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, ${theme.primary} 0%, rgba(0,0,0,0.08) 100%);
-  color: ${theme.white};
-  box-shadow: 0 8px 30px rgba(16,24,40,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.95);
+  color: #111827;
+  box-shadow: 0 8px 30px rgba(16,24,40,0.08), inset 0 1px 0 rgba(255,255,255,0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(15,23,42,0.08);
 
   .header-logo {
     display: flex;
@@ -35,11 +35,11 @@ const StyledCommonHeader = styled.section`
         font-size: 20px;
         font-weight: 700;
         letter-spacing: 0.6px;
-        color: ${theme.white};
+        color: #111827;
       }
       .tag {
         font-size: 12px;
-        color: rgba(255,255,255,0.75);
+        color: rgba(17,24,39,0.65);
       }
     }
   }
@@ -55,9 +55,7 @@ const StyledCommonHeader = styled.section`
       cursor: pointer;
       a {
         text-decoration: none;
-        color: rgba(255,255,255,0.9);
-        font-weight: 600;
-        font-size: 15px;
+        color: rgba(17,24,39,0.85);
         text-transform: uppercase;
         letter-spacing: 0.8px;
         position: relative;
@@ -77,7 +75,7 @@ const StyledCommonHeader = styled.section`
         }
 
         &:hover {
-          color: ${theme.white};
+          color: #111827;
           transform: translateY(-3px);
         }
 

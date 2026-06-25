@@ -3,8 +3,31 @@ import PATH from "../../Routes/Paths";
 import StyledCommonHeader from "./StyledCommonHeader"
 import { PNG_IMAGES } from "../../Routes/assets/constant";
 import { HEADER_MENU } from "./constant";
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
 
 const CommonHeader = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return unsubscribe;
+  }, [auth]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      window.location.href = PATH.LOGIN;
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <StyledCommonHeader>
       <div className="common-header">
@@ -27,7 +50,11 @@ const CommonHeader = () => {
           </ul>
         </div>
         <div className="header-btn">
-          <Button href={PATH.SIGNUP} className="primary-btn">Sign in</Button>
+          {isLoggedIn ? (
+            <Button onClick={handleLogout} className="primary-btn">Sign out</Button>
+          ) : (
+            <Button href={PATH.LOGIN} className="primary-btn">Sign in</Button>
+          )}
         </div>
       </div>
     </StyledCommonHeader>
