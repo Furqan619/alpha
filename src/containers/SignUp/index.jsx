@@ -6,6 +6,7 @@ import auth from "../../services/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import StyledSignUp from './StyledSignUp';
 import PATH from "../../Routes/Paths";
+import { PNG_IMAGES } from "../../Routes/assets/constant";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -47,6 +48,11 @@ const SignUp = () => {
 
   return (
     <StyledSignUp>
+      <div className="logo">
+				<a href={PATH.HOME}>
+					<img src={PNG_IMAGES.ALPHA_LOGO.URL} alt={PNG_IMAGES.ALPHA_LOGO.ALT} />
+				</a>
+			</div>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div>

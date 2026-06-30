@@ -8,6 +8,14 @@ const StyledSignUp = styled.div`
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
+  .logo{
+    img{
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 150px;
+    }
+  }
+
   h2 {
     text-align: center;
     margin-bottom: 20px;
