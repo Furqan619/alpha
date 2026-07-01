@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import StyledSignUp from './StyledSignUp';
 import PATH from "../../Routes/Paths";
 import { PNG_IMAGES } from "../../Routes/assets/constant";
+import { message } from "antd";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -35,14 +36,15 @@ const SignUp = () => {
         });
 
       // console.log("User created:", userCredential.user);
-      alert("Registration successful!");
+      message.success("Registration successful!");
       setUsername("");
       setPhone("");
       setEmail("");
       setPassword("");
       navigate(PATH.LOGIN);
     } catch (error) {
-      alert(error.message);
+      // console.error("Error creating user:", error);
+      message.error("Error creating user: " + error.message);
     }
   };
 

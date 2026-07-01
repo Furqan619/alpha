@@ -6,11 +6,13 @@ import {
   setPersistence,
   browserSessionPersistence,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from 'react';
-import StyledLogin from './StyledLogin';
+import { StyledLogin } from './StyledLogin';
 import PATH from "../../Routes/Paths";
 import { PNG_IMAGES } from "../../Routes/assets/constant";
+import { Input, message, Button } from "antd";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "../../Routes/assets/utils";
 
 const Login = ({ onSubmit }) => {
 	const [email, setEmail] = useState('');
@@ -19,6 +21,14 @@ const Login = ({ onSubmit }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!EMAIL_REGEX.test(email)) {
+			message.error("Please enter a valid email address.");
+			return;
+		}
+		if (!PASSWORD_REGEX.test(password)) {
+			message.error("Please enter a valid password. Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.");
+			return;
+		}
 		try {
 			await setPersistence(auth, browserSessionPersistence);
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -37,9 +47,11 @@ const Login = ({ onSubmit }) => {
 					phone = data.phone || null;
 				}
 			} catch (e) {
-				console.error('Error fetching user profile:', e);
+				message.warning(
+					"Logged in, but failed to fetch user profile."
+				);
 			}
-			alert("Login successful!");
+			message.success("Login successful!");
 			setEmail('');
 			setPassword('');
 			navigate(PATH.PROFILE);
@@ -47,7 +59,13 @@ const Login = ({ onSubmit }) => {
 				onSubmit({ user, username, phone });
 			}
 		} catch (error) {
-			alert(error.message);
+			if (error.code === 'auth/user-not-found') {
+				message.error("User not found. Please check your email.");
+			} else if (error.code === 'auth/wrong-password') {
+				message.error("Incorrect password. Please try again.");
+			} else {
+				message.error("Login failed. Please try again.");
+			}
 		}
 	};
 
@@ -61,29 +79,31 @@ const Login = ({ onSubmit }) => {
 			<h2>Login</h2>
 			<form onSubmit={handleSubmit}>
 				<div>
-					<label>Email</label>
-					<input
-						type="email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
+				<Input
+					type="email"
+					placeholder="Email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					required
+					size="large"
+				/>
 				</div>
 				<div>
-					<label>Password</label>
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
+				<Input.Password
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					required
+					size="large"
+				/>
 				</div>
 				<div>
-					<a href={PATH.FORGOT_PASSWORD}>Forgot Password?</a>
+					<Link to={PATH.FORGOT_PASSWORD}>Forgot Password?</Link>
 				</div>
-					<button type="submit" className="primary-btn">Sign in</button>
-				<p>Don't have an account? <a href={PATH.SIGNUP}>Sign up</a></p>
-				
+				<Button type="primary" htmlType="submit" size="large">
+					Login
+				</Button>
+				<p>Don't have an account? <Link to={PATH.SIGNUP}>Sign up</Link></p>
 			</form>
 		</StyledLogin>
 	);

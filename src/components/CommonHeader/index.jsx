@@ -1,4 +1,5 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
+import { useNavigate } from "react-router-dom";
 import PATH from "../../Routes/Paths";
 import StyledCommonHeader from "./StyledCommonHeader"
 import { PNG_IMAGES } from "../../Routes/assets/constant";
@@ -10,6 +11,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 const CommonHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const auth = getAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -22,9 +24,12 @@ const CommonHeader = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      window.location.href = PATH.LOGIN;
+      message.success("Successfully logged out");
+      setTimeout(() => {
+        navigate(PATH.LOGIN);
+      }, 500);
     } catch (error) {
-      console.error("Logout failed:", error);
+      message.error("Error signing out. Please try again.");
     }
   };
 

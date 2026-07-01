@@ -1,4 +1,4 @@
-import StyledForgotPassword from "./StyledForgotPassword";
+import { StyledForgotPassword } from "../StyledLogin";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
