@@ -7,7 +7,7 @@ const WEBP_IMAGES = Object.freeze({
 
 const PNG_IMAGES = Object.freeze({
   ALPHA_LOGO: {
-    URL: 'https://cdn.jsdelivr.net/gh/furqan619/assets@main/images/alpha-logo.png',
+    URL: 'https://cdn.jsdelivr.net/gh/furqan619/assets@main/images/alpha-logo-updated.png',
     ALT: 'Alpha Logo',
   },
 });

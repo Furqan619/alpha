@@ -19,13 +19,9 @@ const StyledCommonHeader = styled.section`
     display: flex;
     align-items: center;
     gap: 12px;
-    .header-logo-img {
-      width: 72px;
-      height: 72px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-      transition: transform 200ms ease;
+    .header-logo-img{
+      width: 150px;
+      height: auto;
     }
     .brand-title {
       display: flex;
