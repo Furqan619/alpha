@@ -1,4 +1,4 @@
-import { Button, message } from "antd";
+import { Button, Flex, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import PATH from "../../Routes/Paths";
 import StyledCommonHeader from "./StyledCommonHeader"
@@ -35,7 +35,7 @@ const CommonHeader = () => {
 
   return (
     <StyledCommonHeader>
-      <div className="common-header">
+      <Flex justify="space-between" align="center" className="common-header">
         <div className="header-logo">
           <a href={PATH.HOME}>
             <img
@@ -45,7 +45,7 @@ const CommonHeader = () => {
             />
           </a>
         </div>
-        <div>
+        <Flex justify="space-between" align="middle">
           <ul className="header-menu">
             {HEADER_MENU.map((item) => (
               <li key={item.name}>
@@ -53,7 +53,7 @@ const CommonHeader = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </Flex>
         <div className="header-btn">
           {isLoggedIn ? (
             <Button onClick={handleLogout} className="primary-btn">Sign out</Button>
@@ -61,7 +61,7 @@ const CommonHeader = () => {
             <Button href={PATH.LOGIN} className="primary-btn">Sign in</Button>
           )}
         </div>
-      </div>
+      </Flex>
     </StyledCommonHeader>
   )
 }
