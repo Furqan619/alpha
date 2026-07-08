@@ -6,10 +6,13 @@ import { PNG_IMAGES } from "../../Routes/assets/constant";
 import { HEADER_MENU } from "./constant";
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import MainHeader from "./MainHeader";
+import MobileHeader from "./MobileHeader";
 
 
 const CommonHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -20,6 +23,15 @@ const CommonHeader = () => {
 
     return unsubscribe;
   }, [auth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -35,35 +47,19 @@ const CommonHeader = () => {
 
   return (
     <StyledCommonHeader>
-      <Flex justify="space-between" align="center" className="common-header">
-        <div className="header-logo">
-          <a href={PATH.HOME}>
-            <img
-              src={PNG_IMAGES.ALPHA_LOGO.URL}
-              alt={PNG_IMAGES.ALPHA_LOGO.ALT}
-              className="header-logo-img"
-            />
-          </a>
-        </div>
-        <Flex justify="space-between" align="middle">
-          <ul className="header-menu">
-            {HEADER_MENU.map((item) => (
-              <li key={item.name}>
-                <a href={item.path}>{item.name}</a>
-              </li>
-            ))}
-          </ul>
-        </Flex>
-        <div className="header-btn">
-          {isLoggedIn ? (
-            <Button onClick={handleLogout} className="primary-btn">Sign out</Button>
-          ) : (
-            <Button href={PATH.LOGIN} className="primary-btn">Sign in</Button>
-          )}
-        </div>
-      </Flex>
+      {isMobile ? (
+        <MobileHeader
+          isLoggedIn={isLoggedIn}
+          handleLogout={handleLogout}
+        />
+      ) : (
+        <MainHeader
+          isLoggedIn={isLoggedIn}
+          handleLogout={handleLogout}
+        />
+      )}
     </StyledCommonHeader>
-  )
-}
+  );
+};
 
 export default CommonHeader;

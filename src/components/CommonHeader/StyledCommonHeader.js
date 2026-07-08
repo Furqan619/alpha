@@ -90,6 +90,16 @@ const StyledCommonHeader = styled.section`
       &:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(30,64,175,0.25); }
     }
   }
+
+  @media screen and (max-width: ${theme.breakpoints.md}) {
+    padding: 1em 2em;
+    .header-menu {
+      display: none;
+    }
+    .actions {
+      display: none;
+    }
+  }
 }
 `;
 
