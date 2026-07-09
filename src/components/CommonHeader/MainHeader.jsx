@@ -4,8 +4,7 @@ import StyledCommonHeader from "./StyledCommonHeader"
 import { PNG_IMAGES } from "../../Routes/assets/constant";
 import { HEADER_MENU } from "./constant";
 
-const MainHeader = (props) => {
-  const { isLoggedIn, handleLogout } = props;
+const MainHeader = () => {
   return (
     <Flex justify="space-between" align="center" className="common-header">
       <div className="header-logo">
@@ -27,11 +26,7 @@ const MainHeader = (props) => {
         </ul>
       </Flex>
       <div className="header-btn">
-        {isLoggedIn ? (
-          <Button onClick={handleLogout} className="primary-btn">Sign out</Button>
-        ) : (
           <Button href={PATH.LOGIN} className="primary-btn">Sign in</Button>
-        )}
       </div>
     </Flex>
   )

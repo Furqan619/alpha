@@ -7,6 +7,7 @@ import { Spin } from "antd";
 
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(undefined);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 

@@ -7,8 +7,7 @@ import { PNG_IMAGES } from "../../Routes/assets/constant";
 import { HEADER_MENU } from "./constant";
 
 
-const MobileHeader = (props) => {
-  const { isLoggedIn, handleLogout } = props;
+const MobileHeader = () => {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => setOpen(!open);
@@ -44,11 +43,7 @@ const MobileHeader = (props) => {
           </ul>
         </Flex>
         <div className="header-btn">
-          {isLoggedIn ? (
-            <button onClick={handleLogout} className="btn">Sign out</button>
-          ) : (
             <a href={PATH.LOGIN} className="btn">Sign in</a>
-          )}
         </div>
       </Drawer>
     </Flex>

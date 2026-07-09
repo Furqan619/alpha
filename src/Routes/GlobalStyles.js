@@ -30,11 +30,10 @@ const GlobalStyles = createGlobalStyle`
     }
     .header-menu{
       display: flex;
+      align-items: flex-start;
+      flex-direction: column;
       list-style: none;
-      gap: 28px;
-      align-items: center;
-      margin: 0;
-      padding: 0;
+      gap: 16px;
       li {
         cursor: pointer;
         a {
