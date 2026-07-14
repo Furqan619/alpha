@@ -73,6 +73,7 @@ const StyledForgotPassword = styled.div`
   justify-content: center;
   height: 100vh;
   background: #f0f2f5;
+  
 
   .card {
     background: #fff;
@@ -83,7 +84,13 @@ const StyledForgotPassword = styled.div`
     width: 360px;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    .logo {
+    margin-bottom: 20px;
+    img {
+      max-width: 150px;
+    }
+  }
   }
 
   h2 {
