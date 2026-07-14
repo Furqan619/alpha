@@ -26,7 +26,7 @@ function AppWrapperHOC(WrapperComponent) {
       <>
         {isLoading ? null :
           isLoggedIn ?
-          <Flex>
+          <Flex gap="medium" className="mar-t-2 mar-l-2 mar-r-2">
             <SideNavigation />
             <WrapperComponent {...props} />
           </Flex>
