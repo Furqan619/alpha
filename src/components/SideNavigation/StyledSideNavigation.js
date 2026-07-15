@@ -3,14 +3,12 @@ import styled from 'styled-components';
 const StyledSideNavigation = styled.section`
   width: 280px;
   background: linear-gradient(180deg, #ffffff 0%, #e9f2ff 100%);
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 6px 18px rgba(20, 40, 80, 0.12), 0 2px 6px rgba(20, 40, 80, 0.06);
-  border-radius: 12px;
+  border: 1px solid #bebebe;
   box-sizing: border-box;
-  /* let the card size to its content but never exceed the viewport to avoid page scroll */
-  min-height: calc(100vh - 40px);
-  overflow: hidden;
-
+  height: 100vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   .side-nav-button {
@@ -31,16 +29,13 @@ const StyledSideNavigation = styled.section`
     color: #1f2d3d;
     padding: 10px 12px;
     border-radius: 8px;
-    transition: background 160ms ease, color 160ms ease, transform 120ms ease;
 
     &:hover {
       color: #ff2f2f;
       font-weight: 600;
-      transform: translateX(4px);
     }
     &.active {
-      color: #ffffff;
-      background: #ca521a;
+      color: #ff3325;
       font-weight: 600;
     }
   }
