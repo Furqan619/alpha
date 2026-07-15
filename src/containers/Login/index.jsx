@@ -100,7 +100,7 @@ const Login = ({ onSubmit }) => {
 				<div>
 					<Link to={PATH.FORGOT_PASSWORD}>Forgot Password?</Link>
 				</div>
-				<Button type="primary" htmlType="submit" size="large">
+				<Button type="primary" htmlType="submit" size="large" className="primary-button">
 					Login
 				</Button>
 				<p>Don't have an account? <Link to={PATH.SIGNUP}>Sign up</Link></p>

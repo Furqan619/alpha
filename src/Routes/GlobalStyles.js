@@ -158,14 +158,16 @@ const GlobalStyles = createGlobalStyle`
   .mar-r-5{
     margin-right: 50px !important;
   }
-  .primary-btn{
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
+  .primary-button {
+    background: linear-gradient(135deg, #7B56F6 0%, #5A30D7 50%, #5e41c5 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
+    &:hover {
+      font-weight: 600;
+    }
   }
-
   .mobile-menu-body {
     .header-menu {
       display: flex;
@@ -203,12 +205,10 @@ const GlobalStyles = createGlobalStyle`
             border-radius: 3px;
             transition: width 220ms ease;
           }
-
           &:hover {
             color: #111827;
             transform: translateY(-3px);
           }
-
           &:hover:after {
             width: 100%;
           }
