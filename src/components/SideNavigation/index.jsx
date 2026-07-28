@@ -6,6 +6,7 @@ import PATH from "../../Routes/Paths";
 import StyledSideNavigation from './StyledSideNavigation';
 import { getAuth, signOut } from "firebase/auth";
 import { SIDE_NAVIGATION_ROUTES } from "./Constant";
+import { MESSAGES } from "../../Routes/assets/utils";
 
 const SideNavigation = () => {
   const auth = getAuth();
@@ -15,12 +16,12 @@ const SideNavigation = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      message.success("Successfully logged out");
+      message.success(MESSAGES.LOGOUT_SUCCESS);
       setTimeout(() => {
         navigate(PATH.LOGIN);
       }, 500);
     } catch (error) {
-      message.error("Error signing out. Please try again.");
+      message.error(MESSAGES.LOGIN_FAILURE);
     }
   };
 

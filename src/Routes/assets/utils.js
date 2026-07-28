@@ -13,7 +13,7 @@ const MESSAGES = {
   WRONG_PASSWORD: 'Incorrect password. Please try again.',
   FETCH_PROFILE_FAILURE: 'Logged in, but failed to fetch user profile.',
   LOGOUT_SUCCESS: 'Logged Out successful',
-  LOGOUT_FAILURE: 'Logout Failed',
+  LOGOUT_FAILURE: 'Logout Failed. Please try again',
 }
 
 export { EMAIL_REGEX, PASSWORD_REGEX, MESSAGES };

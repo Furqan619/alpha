@@ -52,11 +52,34 @@ const loginThunk =
       return userCredential.user;
 
     } catch (error) {
-      dispatch(loginFailure(error.message));
+      dispatch(loginFailure(error.code));
+
+      let errorMessage = MESSAGES.LOGIN_FAILURE || error.message;
+      switch (error.code) {
+        case "auth/user-not-found":
+          errorMessage = "User not found. Please check your email.";
+          break;
+
+        case "auth/wrong-password":
+          errorMessage = "Incorrect password. Please try again.";
+          break;
+
+        case "auth/invalid-credential":
+          errorMessage = "Invalid email or password.";
+          break;
+
+        case "auth/too-many-requests":
+          errorMessage = "Too many login attempts. Please try again later.";
+          break;
+
+        default:
+          errorMessage = errorMessage || "Login failed. Please try again.";
+      }
+
       try {
-        message.error(MESSAGES.LOGIN_FAILURE || error.message);
+        message.error(errorMessage);
       } catch (e) {
-        message.error(error.message);
+        message.error(errorMessage);
       }
 
       throw error;
@@ -95,4 +118,4 @@ const logoutThunk =
 export {
   loginThunk,
   logoutThunk,
-}
+};
