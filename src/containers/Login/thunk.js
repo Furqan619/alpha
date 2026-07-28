@@ -16,33 +16,14 @@ import {
 import { message } from 'antd';
 import { MESSAGES } from '../../Routes/assets/utils';
 
-const loginThunk =
-  (email, password) =>
+const loginThunk = (email, password) =>
   async (dispatch) => {
     dispatch(loginRequest());
-
     try {
-      await setPersistence(
-        auth,
-        browserSessionPersistence
-      );
-
-      const userCredential =
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-      sessionStorage.setItem(
-        "activeSession",
-        "true"
-      );
-
-      dispatch(
-        loginSuccess(userCredential.user)
-      );
-
+      await setPersistence(auth, browserSessionPersistence);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      sessionStorage.setItem("activeSession", "true");
+      dispatch(loginSuccess(userCredential.user));
       // show success message
       try {
         message.success(MESSAGES.LOGIN_SUCCESS || 'Logged in successfully');
@@ -86,25 +67,18 @@ const loginThunk =
     }
   };
 
-const logoutThunk =
-  () =>
+const logoutThunk = () =>
   async (dispatch) => {
     dispatch(logoutRequest());
-
     try {
       await signOut(auth);
-
-      sessionStorage.removeItem(
-        "activeSession"
-      );
-
+      sessionStorage.removeItem("activeSession");
       dispatch(logoutSuccess());
       try {
         message.success(MESSAGES.LOGOUT_SUCCESS || 'Logged out');
       } catch (e) {
         message.success('Logged out');
       }
-
     } catch (error) {
       dispatch(logoutFailure(error.message));
       try {

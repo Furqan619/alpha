@@ -1,28 +1,22 @@
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Button, Col, message, Flex } from 'antd';
 
 import { LoginOutlined } from '@ant-design/icons';
 import PATH from "../../Routes/Paths";
 import StyledSideNavigation from './StyledSideNavigation';
-import { getAuth, signOut } from "firebase/auth";
+import { logoutThunk } from "../../containers/Login/thunk";
 import { SIDE_NAVIGATION_ROUTES } from "./Constant";
 import { MESSAGES } from "../../Routes/assets/utils";
 
 const SideNavigation = () => {
-  const auth = getAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      message.success(MESSAGES.LOGOUT_SUCCESS);
-      setTimeout(() => {
-        navigate(PATH.LOGIN);
-      }, 500);
-    } catch (error) {
-      message.error(MESSAGES.LOGIN_FAILURE);
-    }
+    await dispatch(logoutThunk());
+    navigate(PATH.LOGIN);
   };
 
   return (
