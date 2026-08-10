@@ -14,7 +14,7 @@ const StyledCommonHeader = styled.section`
 
   .header-logo {
     .header-logo-img{
-      width: 150px;
+      width: 160px;
       height: auto;
     }
     .brand-title {
